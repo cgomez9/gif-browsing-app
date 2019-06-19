@@ -1,0 +1,35 @@
+<div class="container p-b-180 m-t-5">
+    <div class="login-form" style="text-align:center;">
+        <div class="login-div">
+            <div class="section">
+                <img class="login-image" src="../../assets/images/GIF_BROWSING.png"/>
+                <h2 class="main-login-title">SEARCH THE MOST AWESOME GIF ON THE INTERNET!</h2>
+                <p class="secondary-login-title">Please enter your email and password</p>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group" style="margin-bottom:10px;">
+                    <input type="text" placeholder="Email" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" style="border: 1px solid #337ABC!important;border-radius: 4px;font-size: 14px;height: 50px;line-height: 50px;"/>
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required" class="form-error">Email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" style="border: 1px solid #337ABC!important;border-radius: 4px;font-size: 14px;height: 50px;line-height: 50px;"/>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required" class="form-error">Password is required</div>
+                    </div>
+                </div>
+                <!-- <div class="forgot" style="text-align: left; margin-bottom:30px;">
+                    <a routerLink="/recover">Forgot password?</a>
+                </div> -->
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary btn-login">Login</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                    <!-- <span>
+                        Not a member? <a [routerLink]="['/register']"><b>JOIN NOW</b></a>
+                    </span> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

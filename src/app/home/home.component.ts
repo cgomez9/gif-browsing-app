@@ -9,13 +9,22 @@ import { AuthenticationService, MessageService } from '@/_services';
     styleUrls: ['home.component.css']
 })
 export class HomeComponent {
-    users: User[] = [];
+    searchString: string;
 
     constructor(private messageService: MessageService) { }
 
-    ngOnInit() {
-        // this.userService.getAll().pipe(first()).subscribe(users => {
-        //     this.users = users;
-        // });
+    ngOnInit() {}
+
+    search() {
+        this.sendMessage(this.searchString);
+    }
+
+    sendMessage(message: string): void {
+        // send message to subscribers via observable subject
+        this.messageService.sendMessage(message);
+    }
+
+    clearMessages(): void {
+        this.messageService.clearMessages();
     }
 }

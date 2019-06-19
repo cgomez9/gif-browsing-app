@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
@@ -14,13 +15,16 @@ import { AlertService, MessageService } from '@/_services';
 import { AlertComponent } from '@/_components';
 import { NavbarComponent } from './navbar';
 import { SearchResultComponent } from './search-result';
+import { CoreService } from './_services/core.service';
+
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
@@ -33,6 +37,7 @@ import { SearchResultComponent } from './search-result';
     providers: [
         AlertService, 
         MessageService,
+        CoreService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],

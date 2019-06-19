@@ -16,6 +16,8 @@ import { AlertComponent } from '@/_components';
 import { NavbarComponent } from './navbar';
 import { SearchResultComponent } from './search-result';
 import { CoreService } from './_services/core.service';
+import { HistoryComponent } from './history/history.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { CoreService } from './_services/core.service';
         AlertComponent,
         NavbarComponent,
         SearchResultComponent,
+        HistoryComponent,
+        FavoriteComponent,
     ],
     providers: [
         AlertService, 

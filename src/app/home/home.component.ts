@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { User } from '@/_models';
-import { AuthenticationService, MessageService } from '@/_services';
+import { AuthenticationService, MessageService, AlertService } from '@/_services';
+import { CoreService } from '@/_services/core.service';
 
 @Component({ 
     templateUrl: 'home.component.html',
@@ -11,15 +12,25 @@ import { AuthenticationService, MessageService } from '@/_services';
 export class HomeComponent {
     searchString: string;
 
-    constructor(private messageService: MessageService) { }
+    constructor(
+        private messageService: MessageService, 
+        private coreService: CoreService,
+        private alertService: AlertService) { }
 
     ngOnInit() {}
 
     search() {
-        this.sendMessage(this.searchString);
+        this.coreService.searchGIFs(this.searchString).subscribe(
+            res => {
+                this.sendMessage(res);
+            },
+            err => {
+                this.alertService.error("An unexpected error ocurred, please try again later")
+            }
+        );
     }
 
-    sendMessage(message: string): void {
+    sendMessage(message: any): void {
         // send message to subscribers via observable subject
         this.messageService.sendMessage(message);
     }

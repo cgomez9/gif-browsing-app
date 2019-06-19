@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 
 import { User } from '@/_models';
+import { Gif } from '@/_models/gif';
 
 @Injectable({ providedIn: 'root' })
 export class CoreService {
@@ -14,7 +15,7 @@ export class CoreService {
 
     // GIPHY SERVICES
 
-    searchGIFs(keyword: string) {
+    searchGIFs(keyword: string){
         return this.http.get(`${environment.apiUrl}/search/${keyword}`, {}).
             pipe(map(res => {
                 console.log(res);

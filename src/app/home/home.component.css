@@ -3,6 +3,10 @@
     margin-top: 5%;
 }
 
+.input-group-append{
+    cursor: pointer;
+}
+
 #search-form {
     height:50px;
     font-size:14pt;

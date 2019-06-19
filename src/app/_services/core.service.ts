@@ -18,7 +18,7 @@ export class CoreService {
     searchGIFs(keyword: string){
         return this.http.get(`${environment.apiUrl}/search/${keyword}`, {}).
             pipe(map(res => {
-                return res.result as GifMetadata;
+                return res;
             },err => {
                 return err;
             }));

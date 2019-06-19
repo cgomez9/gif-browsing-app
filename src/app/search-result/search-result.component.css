@@ -10,4 +10,22 @@
     width: 100%;
     margin-top: 15px;
     height: 250px;
+    cursor: pointer;
+}
+
+.gif-wrapper {
+    position: relative;
+}
+
+.tag {
+    float: left;
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    z-index: 1000;
+    padding: 5px;
+    color: #E43F6F;
+    font-weight: bold;
+    font-size: 22px;
+    cursor: pointer;
 }

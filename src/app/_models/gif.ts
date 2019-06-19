@@ -18,4 +18,5 @@ export class Gif {
     trending_datetime: string;
     type: string;
     url: string;
+    favorite: boolean = false;
 }

@@ -19,6 +19,8 @@ import { CoreService } from './_services/core.service';
 import { HistoryComponent } from './history/history.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 
+import { LightboxModule } from 'ngx-lightbox';
+
 
 @NgModule({
     imports: [
@@ -26,7 +28,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        LightboxModule
     ],
     declarations: [
         AppComponent,

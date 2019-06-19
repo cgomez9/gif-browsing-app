@@ -22,7 +22,7 @@ export class HomeComponent {
     search() {
         this.coreService.searchGIFs(this.searchString).subscribe(
             res => {
-                this.sendMessage(res as GifMetadata);
+                this.sendMessage(res['result'] as GifMetadata);
             },
             err => {
                 this.alertService.error("An unexpected error ocurred, please try again later")

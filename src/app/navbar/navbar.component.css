@@ -1,0 +1,19 @@
+.navbar-brand {
+    width: 250px;
+    overflow: hidden;
+    margin:0;
+}
+
+.navbar-logo {
+    display: block;
+    width: 100%;
+    margin: -40.875% 0;
+}
+
+.bg-app-navbar {
+    background-color: #008DD5!important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #373F51!important;
+}

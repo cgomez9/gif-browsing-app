@@ -1,1 +1,7 @@
-<span>asdasdasdasdasdasd</span>
+<div class="gif-container m-t-30 p-b-100">
+    <div *ngIf="this.gifs" class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2" *ngFor="let gif of this.gifs.data">
+            <img class="gif-img" [src]="gif.images.fixed_height_still.url"/>
+        </div>
+    </div>
+</div>

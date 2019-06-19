@@ -1,6 +1,10 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+<nav class="navbar navbar-expand navbar-dark bg-app-navbar" *ngIf="currentUser">
+    <a class="navbar-brand" [routerLink]="['/']">
+        <img class="navbar-logo" src="../../assets/images/GIF_BROWSING.png"/>
+    </a>
     <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" [routerLink]="['/favorite']">Favorite GIFs</a>
+        <a class="nav-item nav-link" [routerLink]="['/history']">Search History</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>
   </nav>

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 
-import { User } from '@/_models';
+import { User, GifMetadata } from '@/_models';
 import { Gif } from '@/_models/gif';
 
 @Injectable({ providedIn: 'root' })
@@ -18,8 +18,7 @@ export class CoreService {
     searchGIFs(keyword: string){
         return this.http.get(`${environment.apiUrl}/search/${keyword}`, {}).
             pipe(map(res => {
-                console.log(res);
-                return res;
+                return res.result as GifMetadata;
             },err => {
                 return err;
             }));
@@ -63,7 +62,6 @@ export class CoreService {
     getSearchHistory() {
         return this.http.get(`${environment.apiUrl}/history`, {}).
             pipe(map(res => {
-                console.log(res);
                 return res;
             },err => {
                 return err;

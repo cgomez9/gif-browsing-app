@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService, AlertService, MessageService } from '@/_services';
 import { Subscription } from 'rxjs';
+import { GifMetadata } from '@/_models';
 
 @Component({ 
     selector: 'search-result',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
     styleUrls: ['search-result.component.css']
 })
 export class SearchResultComponent {
-    gifs = [];
+    gifs: GifMetadata;
     subscription: Subscription;
     
     constructor(
@@ -23,10 +24,8 @@ export class SearchResultComponent {
         this.subscription = this.messageService.getMessage().subscribe(message => {
             if (message) {
                 this.gifs = message;
-            } else {
-                // clear messages when empty message received
-                this.gifs = [];
-            }
+                console.log(this.gifs);
+            } 
           });
     }
 

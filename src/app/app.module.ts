@@ -20,6 +20,7 @@ import { HistoryComponent } from './history/history.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 
 import { LightboxModule } from 'ngx-lightbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { LightboxModule } from 'ngx-lightbox';
         HttpClientModule,
         AppRoutingModule,
         FormsModule,
-        LightboxModule
+        LightboxModule,
+        InfiniteScrollModule
     ],
     declarations: [
         AppComponent,

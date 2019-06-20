@@ -23,7 +23,6 @@ export class HomeComponent {
             res => {
                 console.log(res);
                 this.sendMessage({ data: res['result'] as GifMetadata, target : 'trending' });
-                this.saveHistory();
                 this.loading = false;
             },
             err => {

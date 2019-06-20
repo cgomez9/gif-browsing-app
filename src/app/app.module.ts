@@ -6,21 +6,20 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { LightboxModule } from 'ngx-lightbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-
-import { AlertService, MessageService } from '@/_services';
-import { AlertComponent } from '@/_components';
+import { HistoryComponent } from './history';
+import { FavoriteComponent } from './favorite';
 import { NavbarComponent } from './navbar';
 import { SearchResultComponent } from './search-result';
-import { CoreService } from './_services/core.service';
-import { HistoryComponent } from './history/history.component';
-import { FavoriteComponent } from './favorite/favorite.component';
+import { AlertComponent } from '@/_components';
 
-import { LightboxModule } from 'ngx-lightbox';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AlertService, MessageService } from '@/_services';
+import { CoreService } from './_services/core.service';
 
 
 @NgModule({

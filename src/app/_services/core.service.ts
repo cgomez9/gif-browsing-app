@@ -63,7 +63,6 @@ export class CoreService {
     }
 
     setFavoriteGIF(gifId: string, keyword: string) {
-
         let httpParams = new HttpParams()
             .append('gif_id', gifId)
             .append('keyword', keyword);
@@ -97,7 +96,6 @@ export class CoreService {
     }
 
     setSearchHistory(searchString: string) {
-
         let httpParams = new HttpParams().append('search_string', searchString)
 
         return this.http.post(`${environment.apiUrl}/history`, httpParams).

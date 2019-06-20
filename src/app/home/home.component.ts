@@ -31,21 +31,23 @@ export class HomeComponent {
     }
 
     search() {
-        this.loading = true;
-        this.coreService.searchGIFs(this.searchString).subscribe(
-            res => {
-                this.sendMessage({ 
-                    data: res['result'] as GifMetadata, 
-                    target : 'search', 
-                    keyword : this.searchString
-                });
-                this.saveHistory();
-                this.loading = false;
-            },
-            err => {
-                this.alertService.error("An unexpected error ocurred while searching, please try again later")
-            }
-        );
+        if (this.searchString) {
+            this.loading = true;
+            this.coreService.searchGIFs(this.searchString).subscribe(
+                res => {
+                    this.sendMessage({ 
+                        data: res['result'] as GifMetadata, 
+                        target : 'search', 
+                        keyword : this.searchString
+                    });
+                    this.saveHistory();
+                    this.loading = false;
+                },
+                err => {
+                    this.alertService.error("An unexpected error ocurred while searching, please try again later")
+                }
+            );
+        }
     }
 
     sendMessage(message: any): void {

@@ -1,27 +1,28 @@
-# GifApp
+## About Gif Browsing CoAppre
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+This is the GIF Browsing app. This app is built with Angular 7 inside a Docker container. We use Docker Compose to set both production and development enviroments.
 
-## Development server
+## Setting up the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+First you need the following softwares installed:
 
-## Code scaffolding
+- Docker
+- Docker Compose
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Once you have installed the depencies, open a terminal in the root folder of the project and run the following command:
 
-## Build
+`docker-compose up -d`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The first time is going to download and build the containers so it's going to take a while. Once the process is finish you can check that everything went right with the following command:
 
-## Running unit tests
+`docker-compose ps`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You should have one container running. In the next step, you need to enter the container and install the javascript dependencies. Use the following command in project's root:
 
-## Running end-to-end tests
+`docker-compose exec app bash`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Once inside the container, you need to run the following command:
 
-## Further help
+`npm install`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+This command it's going to install all project's dependencies. And this is it, if everything went right, you now have the app running in `localhost`. In order for this app to function, you need the Core [Core] (https://www.hola.com).

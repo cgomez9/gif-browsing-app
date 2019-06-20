@@ -5,3 +5,4 @@ export * from './gifImages';
 export * from './gifMetadata';
 export * from './gifMetadataPagination';
 export * from './favoriteGif';
+export * from './searchHistory';

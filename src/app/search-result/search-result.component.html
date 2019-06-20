@@ -1,10 +1,24 @@
-<div class="gif-container m-t-30 p-b-100">
-    <div *ngIf="this._album" class="row">
+<div *ngIf="this._album" class="gif-container m-t-30 p-b-100">
+    <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-2 gif-wrapper" *ngFor="let image of this._album; let i=index">
             <div (click)="onFavorite(i)" class="tag">
                 <i [className]="image.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
             </div>
             <img class="gif-img" [src]="image.thumb" (click)="open(i)"/>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!this._album && this.search && !this.loading" class="gif-container m-t-30 p-b-100">
+    <div class="row">
+        <h2>Your search did not get any results :(</h2>
+    </div>
+</div>
+
+<div *ngIf="loading" class="row">
+    <div class="col-md-5 offset-md-3">
+        <div class="loading">
+            <img src="../../assets/images/loading.gif" />
         </div>
     </div>
 </div>

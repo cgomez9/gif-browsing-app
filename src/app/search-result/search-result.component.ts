@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { AlertService, MessageService } from '@/_services';
 import { Subscription } from 'rxjs';
@@ -12,10 +12,12 @@ import { CoreService } from '@/_services/core.service';
     styleUrls: ['search-result.component.css']
 })
 export class SearchResultComponent {
+    @Input() loading: boolean;
     gifs: GifMetadata;
     favoriteGifs: FavoriteGif[];
     _album = [];
     subscription: Subscription;
+    search: boolean = false;
     
     constructor(
         private alertService: AlertService,
@@ -38,6 +40,7 @@ export class SearchResultComponent {
     searchHandler(data) {
         this._album = [];
         this.gifs = data;
+        this.loading = false;
         this.gifs.data.map( gif => {
             const album = {
                 src: gif.images.original.url,
@@ -48,6 +51,7 @@ export class SearchResultComponent {
             };
             this._album.push(album);
         });
+        this.search = true;
     }
 
     favoriteHandler(data) {
@@ -56,6 +60,7 @@ export class SearchResultComponent {
         this.coreService.getGIFs(ids.join()).subscribe(
             res => {
                 let favoriteGif = res['result'] as GifMetadata;
+                this.loading = false;
                 favoriteGif.data.map( gif => {
                     const album = {
                         src: gif.images.original.url,

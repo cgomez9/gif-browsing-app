@@ -10,6 +10,7 @@ import { CoreService } from '@/_services/core.service';
 })
 export class HomeComponent {
     searchString: string;
+    loading: boolean = false;
 
     constructor(
         private messageService: MessageService, 
@@ -19,10 +20,12 @@ export class HomeComponent {
     ngOnInit() {}
 
     search() {
+        this.loading = true;
         this.coreService.searchGIFs(this.searchString).subscribe(
             res => {
                 this.sendMessage({ data: res['result'] as GifMetadata, target : 'search' });
                 this.saveHistory();
+                this.loading = false;
             },
             err => {
                 this.alertService.error("An unexpected error ocurred while searching, please try again later")

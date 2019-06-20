@@ -8,6 +8,7 @@ import { CoreService } from '@/_services/core.service';
   styleUrls: ['./favorite.component.css']
 })
 export class FavoriteComponent implements OnInit {
+  loading: boolean = false;
 
   constructor(
     private messageService: MessageService,
@@ -16,9 +17,11 @@ export class FavoriteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.coreService.getFavoriteGIFs().subscribe(
       res => {
         this.sendMessage({ data: res, target : 'favorite' });
+        this.loading = false;
       },
       err => {
         this.alertService.error("An unexpected error ocurred, please try again later")

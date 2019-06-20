@@ -16,7 +16,25 @@ export class CoreService {
     // GIPHY SERVICES
 
     searchGIFs(keyword: string){
-        return this.http.get(`${environment.apiUrl}/search/${keyword}`, {}).
+        return this.http.get(`${environment.apiUrl}/gif/search/${keyword}`, {}).
+            pipe(map(res => {
+                return res;
+            },err => {
+                return err;
+            }));
+    }
+
+    getGIF(id: string){
+        return this.http.get(`${environment.apiUrl}/gif/${id}`, {}).
+            pipe(map(res => {
+                return res;
+            },err => {
+                return err;
+            }));
+    }
+
+    getGIFs(ids: string){
+        return this.http.get(`${environment.apiUrl}/gif/multiple/${ids}`, {}).
             pipe(map(res => {
                 return res;
             },err => {
@@ -48,8 +66,8 @@ export class CoreService {
             }));
     }
 
-    deleteFavoriteGIFs(favoriteId: string) {
-        return this.http.delete(`${environment.apiUrl}/favorite/${favoriteId}`, {}).
+    deleteFavoriteGIFs(gifId: string) {
+        return this.http.delete(`${environment.apiUrl}/favorite/${gifId}`, {}).
             pipe(map(res => {
                 return res;
             },err => {

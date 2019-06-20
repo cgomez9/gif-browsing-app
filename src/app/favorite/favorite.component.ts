@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService, AlertService } from '@/_services';
+import { CoreService } from '@/_services/core.service';
 
 @Component({
   selector: 'app-favorite',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoriteComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private messageService: MessageService,
+    private coreService: CoreService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit() {
+    this.coreService.getFavoriteGIFs().subscribe(
+      res => {
+        this.sendMessage({ data: res, target : 'favorite' });
+      },
+      err => {
+        this.alertService.error("An unexpected error ocurred, please try again later")
+      }
+    );
+  }
+
+  sendMessage(message: any): void {
+    // send message to subscribers via observable subject
+    this.messageService.sendMessage(message);
+  }
+
+  clearMessages(): void {
+      this.messageService.clearMessages();
   }
 
 }

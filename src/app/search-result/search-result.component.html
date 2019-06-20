@@ -1,4 +1,4 @@
-<div *ngIf="this._album" class="gif-container m-t-30 p-b-100">
+<div *ngIf="this._album.length > 0" class="gif-container m-t-30 p-b-100">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-2 gif-wrapper" *ngFor="let image of this._album; let i=index">
             <div (click)="onFavorite(i)" class="tag">
@@ -9,9 +9,19 @@
     </div>
 </div>
 
-<div *ngIf="!this._album && this.search && !this.loading" class="gif-container m-t-30 p-b-100">
-    <div class="row">
-        <h2>Your search did not get any results :(</h2>
+<div *ngIf="this.target == 'search'">
+    <div *ngIf="this._album.length == 0 && this.search" class="gif-container m-t-30 p-b-100 mx-0">
+        <div class="row">
+            <h2 class="no-results">Your search did not get any results :(</h2>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="this.target == 'favorite'">
+    <div *ngIf="this._album.length == 0 && this.search" class="gif-container m-t-30 p-b-100 mx-0">
+        <div class="row">
+            <h2 class="no-results">You don't have any favorite GIF yet.</h2>
+        </div>
     </div>
 </div>
 

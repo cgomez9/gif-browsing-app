@@ -18,6 +18,7 @@ export class SearchResultComponent {
     _album = [];
     subscription: Subscription;
     search: boolean = false;
+    target: string;
     
     constructor(
         private alertService: AlertService,
@@ -28,6 +29,7 @@ export class SearchResultComponent {
         // subscribe to home component messages
         this.subscription = this.messageService.getMessage().subscribe(message => {
             if (message) {
+                this.target = message.target;
                 if (message.target == 'search') {
                     this.searchHandler(message.data);
                 } else if (message.target == 'favorite') {
@@ -55,27 +57,32 @@ export class SearchResultComponent {
     }
 
     favoriteHandler(data) {
+        this._album = [];
         this.favoriteGifs = data;
         const ids = this.favoriteGifs.map( (favorite) => favorite.gif_id );
-        this.coreService.getGIFs(ids.join()).subscribe(
-            res => {
-                let favoriteGif = res['result'] as GifMetadata;
-                this.loading = false;
-                favoriteGif.data.map( gif => {
-                    const album = {
-                        src: gif.images.original.url,
-                        caption: gif.title,
-                        thumb: gif.images.fixed_height_still.url,
-                        favorite: true,
-                        id: gif.id
-                    };
-                    this._album.push(album);
-                });
-            },
-            err => {
-                this.alertService.error("An unexpected error ocurred, please try again later")
-            }
-        );
+        if (ids.length > 0) {
+            this.coreService.getGIFs(ids.join()).subscribe(
+                res => {
+                    let favoriteGif = res['result'] as GifMetadata;
+                    this.loading = false;
+                    favoriteGif.data.map( gif => {
+                        const album = {
+                            src: gif.images.original.url,
+                            caption: gif.title,
+                            thumb: gif.images.fixed_height_still.url,
+                            favorite: true,
+                            id: gif.id
+                        };
+                        this._album.push(album);
+                    });
+                    this.search = true;
+                },
+                err => {
+                    this.alertService.error("An unexpected error ocurred, please try again later")
+                }
+            );
+        }
+        this.search = true;
     }
 
     open(index: number): void {

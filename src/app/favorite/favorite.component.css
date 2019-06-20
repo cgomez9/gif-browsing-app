@@ -11,6 +11,11 @@
             animation: fadein 3s;
 }
 
+.loading-image {
+    margin-top: 50px;
+    height: 50px;
+}
+
 
 @keyframes fadein {
     from { opacity: 0; }

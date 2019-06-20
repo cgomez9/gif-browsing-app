@@ -1,3 +1,25 @@
-<p>
-  history works!
-</p>
+<div class="row">
+  <h2 class="history-title">Search History</h2>
+</div>
+<div class="row">
+    <div class="col-md-5">
+      <h4 class="history-title-secondary">Searched</h4>
+    </div>
+    <div class="col-md-3 offset-md-3">
+      <h4 class="history-title-secondary">Date</h4>
+    </div>
+  </div>
+<div *ngIf="this.searchHistory">
+  <div *ngFor="let history of this.searchHistory" class="row history-results">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-5">
+          <p class="lead"><span class="search-string">{{ history.search_string }}</span></p>
+        </div>
+        <div class="col-md-3 offset-md-3">
+          <p class="search-string">{{ history.created_at }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

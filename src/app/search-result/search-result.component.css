@@ -71,3 +71,9 @@
 .no-results {
     color: #4F7CAC;
 }
+
+.trending-title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #C0E0DE;
+}

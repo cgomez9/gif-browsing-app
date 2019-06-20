@@ -30,7 +30,7 @@ export class SearchResultComponent {
         this.subscription = this.messageService.getMessage().subscribe(message => {
             if (message) {
                 this.target = message.target;
-                if (message.target == 'search') {
+                if (message.target == 'search' || message.target == 'trending') {
                     this.searchHandler(message.data);
                 } else if (message.target == 'favorite') {
                     this.favoriteHandler(message.data);

@@ -42,6 +42,15 @@ export class CoreService {
             }));
     }
 
+    getTrendingGIFs(){
+        return this.http.get(`${environment.apiUrl}/gif/trending`, {}).
+            pipe(map(res => {
+                return res;
+            },err => {
+                return err;
+            }));
+    }
+
     // FAVORITE GIF SERVICES
 
     getFavoriteGIFs() {

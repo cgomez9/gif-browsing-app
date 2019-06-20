@@ -66,4 +66,8 @@ export class HomeComponent {
             }
         );
     }
+
+    onKeyDown(event) {
+        this.search();
+    }
 }

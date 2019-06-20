@@ -1,6 +1,6 @@
 <div class="row">
     <div class="input-group pl-0">
-        <input [(ngModel)]="searchString" class="form-control my-0 py-1" id="search-form" type="text" placeholder="Search for a GIF" aria-label="Search">
+        <input (keydown.enter)="onKeyDown($event)" [(ngModel)]="searchString" class="form-control my-0 py-1" id="search-form" type="text" placeholder="Search for a GIF" aria-label="Search">
         <div class="input-group-append">
             <span class="input-group-text lighten-3" (click)="search()">
                 <i class="fas fa-search text-grey" aria-hidden="true"></i>

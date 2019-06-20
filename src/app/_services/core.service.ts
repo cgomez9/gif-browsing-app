@@ -56,7 +56,6 @@ export class CoreService {
     getFavoriteGIFs() {
         return this.http.get(`${environment.apiUrl}/favorite`, {}).
             pipe(map(res => {
-                console.log(res);
                 return res;
             },err => {
                 return err;

@@ -7,9 +7,25 @@
     cursor: pointer;
 }
 
+.input-group-text {
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #C6E0FF;
+    border: 0px solid #212529;
+    border-radius: 0px;
+}
+
 #search-form {
-    height:50px;
-    font-size:14pt;
+    height: 50px;
+    font-size: 14pt;
+    background-color: #2978A0;
+    border: 0px solid #212529;
+    border-radius: 0px;
+}
+
+::placeholder {
+    color: #C6E0FF;
 }
 
 .loading-image {

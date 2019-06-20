@@ -1,12 +1,12 @@
 .history-title {
     margin-top: 50px;
-    color: #C0E0DE;
+    color: #C6E0FF;
     margin-bottom: 30px;
 }
 
 .history-title-secondary {
     margin-top: 10px;
-    color: #C0E0DE;
+    color: #C6E0FF;
     margin-bottom: 30px;
 }
 
@@ -29,17 +29,17 @@
 
 .jumbotron{
     width: 100%;
-    background-color: #4F7CAC;
+    background-color: #2978A0;
     padding: 2rem 1rem;
 }
 
 .search-string{
-    color: #9EEFE5;
+    color: #C6E0FF;
     font-weight: bold;
 }
 
 .no-results {
-    color: #4F7CAC;
+    color: #C6E0FF;
 }
 
 @keyframes fadein {

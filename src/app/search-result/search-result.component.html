@@ -1,6 +1,11 @@
 <div *ngIf="this._album.length > 0" class="gif-container m-t-30 p-b-100">
+    <div *ngIf="this.target == 'trending'" class="row">
+        <div class="col-md-12">
+            <h2 class="trending-title">Showing trending GIFs</h2>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-2 gif-wrapper" *ngFor="let image of this._album; let i=index">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-2 gif-wrapper" *ngFor="let image of this.display; let i=index" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMore()">
             <div (click)="onFavorite(i)" class="tag">
                 <i [className]="image.favorite ? 'fas fa-heart' : 'far fa-heart'"></i>
             </div>
@@ -21,14 +26,6 @@
     <div *ngIf="this._album.length == 0 && this.search" class="gif-container m-t-30 p-b-100 mx-0">
         <div class="row">
             <h2 class="no-results">You don't have any favorite GIF yet.</h2>
-        </div>
-    </div>
-</div>
-
-<div *ngIf="loading" class="row">
-    <div class="col-md-5 offset-md-3">
-        <div class="loading">
-            <img src="../../assets/images/loading.gif" />
         </div>
     </div>
 </div>

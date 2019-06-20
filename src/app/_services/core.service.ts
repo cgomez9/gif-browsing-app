@@ -16,7 +16,7 @@ export class CoreService {
     // GIPHY SERVICES
 
     searchGIFs(keyword: string){
-        return this.http.get(`${environment.apiUrl}/gif/search/${keyword}`, {}).
+        return this.http.get(`${environment.apiUrl}/gif/search/${keyword}/${environment.gifLimit}`, {}).
             pipe(map(res => {
                 return res;
             },err => {
@@ -35,6 +35,15 @@ export class CoreService {
 
     getGIFs(ids: string){
         return this.http.get(`${environment.apiUrl}/gif/multiple/${ids}`, {}).
+            pipe(map(res => {
+                return res;
+            },err => {
+                return err;
+            }));
+    }
+
+    getTrendingGIFs(){
+        return this.http.get(`${environment.apiUrl}/gif/trending/${environment.gifLimit}`, {}).
             pipe(map(res => {
                 return res;
             },err => {

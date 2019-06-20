@@ -17,7 +17,19 @@ export class HomeComponent {
         private coreService: CoreService,
         private alertService: AlertService) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.loading = true;
+        this.coreService.getTrendingGIFs().subscribe(
+            res => {
+                console.log(res);
+                this.sendMessage({ data: res['result'] as GifMetadata, target : 'trending' });
+                this.loading = false;
+            },
+            err => {
+                this.alertService.error("An unexpected error ocurred while searching, please try again later")
+            }
+        );
+    }
 
     search() {
         this.loading = true;

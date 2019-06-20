@@ -63,9 +63,11 @@ export class CoreService {
             }));
     }
 
-    setFavoriteGIF(gifId: string) {
+    setFavoriteGIF(gifId: string, keyword: string) {
 
-        let httpParams = new HttpParams().append('gif_id', gifId)
+        let httpParams = new HttpParams()
+            .append('gif_id', gifId)
+            .append('keyword', keyword);
 
         return this.http.post(`${environment.apiUrl}/favorite`, httpParams).
             pipe(map(res => {

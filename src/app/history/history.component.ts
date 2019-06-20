@@ -10,6 +10,8 @@ import { SearchHistory } from '@/_models';
 })
 export class HistoryComponent implements OnInit {
   searchHistory: SearchHistory[] = [];
+  loading: boolean = false;
+  loaded: boolean = false;
 
   constructor(
     private coreService: CoreService,
@@ -17,9 +19,12 @@ export class HistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.coreService.getSearchHistory().subscribe(
       res => {
         this.searchHistory = res as SearchHistory[];
+        this.loading = false;
+        this.loaded = true;
       },
       err => {
         this.alertService.error("An unexpected error ocurred, please try again later")

@@ -21,7 +21,6 @@ export class HomeComponent {
         this.loading = true;
         this.coreService.getTrendingGIFs().subscribe(
             res => {
-                console.log(res);
                 this.sendMessage({ data: res['result'] as GifMetadata, target : 'trending' });
                 this.loading = false;
             },
@@ -35,7 +34,11 @@ export class HomeComponent {
         this.loading = true;
         this.coreService.searchGIFs(this.searchString).subscribe(
             res => {
-                this.sendMessage({ data: res['result'] as GifMetadata, target : 'search' });
+                this.sendMessage({ 
+                    data: res['result'] as GifMetadata, 
+                    target : 'search', 
+                    keyword : this.searchString
+                });
                 this.saveHistory();
                 this.loading = false;
             },

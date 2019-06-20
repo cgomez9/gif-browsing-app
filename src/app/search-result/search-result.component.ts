@@ -16,9 +16,11 @@ export class SearchResultComponent {
     gifs: GifMetadata;
     favoriteGifs: FavoriteGif[];
     _album = [];
-    subscription: Subscription;
+    messageSubscription: Subscription;
+    setFavoriteSubscription: Subscription;
+    deleteFavoriteSubscription: Subscription;
     search: boolean = false;
-    target: string;
+    message;
     scrollIndex = 0;
     CHUNK = 12; // Amount of GIFs to load by chunk
     display = []; // GIFS to display
@@ -30,10 +32,10 @@ export class SearchResultComponent {
         private coreService: CoreService
     ) {
         // subscribe to home component messages
-        this.subscription = this.messageService.getMessage().subscribe(message => {
+        this.messageSubscription = this.messageService.getMessage().subscribe(message => {
             if (message) {
                 this.loading = true;
-                this.target = message.target;
+                this.message = message;
                 if (message.target == 'search' || message.target == 'trending') {
                     this.searchHandler(message.data);
                 } else if (message.target == 'favorite') {
@@ -46,19 +48,29 @@ export class SearchResultComponent {
     searchHandler(data) {
         this.resetDisplay();
         this.gifs = data;
-        this.gifs.data.map( gif => {
-            const album = {
-                src: gif.images.original.url,
-                caption: gif.title,
-                thumb: gif.images.fixed_height_still.url,
-                favorite: gif.favorite,
-                id: gif.id
-            };
-            this._album.push(album);
-        });
-        this.displayGIFsChunks();
-        this.loading = false;
-        this.search = true;
+        this.coreService.getFavoriteGIFs().subscribe(
+            res => {
+                this.favoriteGifs = res as FavoriteGif[];
+                const ids = this.favoriteGifs.map( (favorite) => favorite.gif_id );
+                this.gifs.data.map( gif => {
+                    const album = {
+                        src: gif.images.original.url,
+                        caption: gif.title,
+                        thumb: gif.images.fixed_height_still.url,
+                        favorite: ids.includes(gif.id),
+                        keyword: this.message.keyword,
+                        id: gif.id
+                    };
+                    this._album.push(album);
+                });
+                this.displayGIFsChunks();
+                this.loading = false;
+                this.search = true;
+            },
+            err => {
+              this.alertService.error("An unexpected error ocurred, please try again later")
+            }
+          );
     }
 
     favoriteHandler(data) {
@@ -70,12 +82,13 @@ export class SearchResultComponent {
                 res => {
                     let favoriteGif = res['result'] as GifMetadata;
             
-                    favoriteGif.data.map( gif => {
+                    favoriteGif.data.map( (gif, index) => {
                         const album = {
                             src: gif.images.original.url,
                             caption: gif.title,
                             thumb: gif.images.fixed_height_still.url,
                             favorite: true,
+                            keyword: this.favoriteGifs[index].keyword,
                             id: gif.id
                         };
                         this._album.push(album);
@@ -120,29 +133,29 @@ export class SearchResultComponent {
     }
 
     setFavorite(index) {
-        this.coreService.setFavoriteGIF(this._album[index].id).subscribe(
-            res => {
-                this._album[index].favorite = true;
-                this.display[index].favorite = true;
-                // this.alertService.success(`GIF '${this._album[index].caption}' was added to your favorites!`)
-            },
-            err => {
-                this.alertService.error("An unexpected error ocurred, please try again later")
-            }
-        );
+        this.setFavoriteSubscription = this.coreService.setFavoriteGIF(this._album[index].id, this._album[index].keyword)
+            .subscribe(
+                res => {
+                    this._album[index].favorite = true;
+                    this.display[index].favorite = true;
+                },
+                err => {
+                    this.alertService.error("An unexpected error ocurred, please try again later")
+                }
+            );
     }
 
     deleteFavorite(index) {
-        this.coreService.deleteFavoriteGIFs(this._album[index].id).subscribe(
-            res => {
-                this._album[index].favorite = false;
-                this.display[index].favorite = false;
-                // this.alertService.success(`GIF '${this._album[index].caption}' was deleted from your favorites!`)
-            },
-            err => {
-                this.alertService.error("An unexpected error ocurred, please try again later")
-            }
-        );
+        this.deleteFavoriteSubscription = this.coreService.deleteFavoriteGIFs(this._album[index].id)
+            .subscribe(
+                res => {
+                    this._album[index].favorite = false;
+                    this.display[index].favorite = false;
+                },
+                err => {
+                    this.alertService.error("An unexpected error ocurred, please try again later")
+                }
+            );
     }
      
     close(): void {
@@ -177,6 +190,16 @@ export class SearchResultComponent {
         }
         this.display = copy;
         this.scrollIndex++;
+    }
+
+    ngOnDestroy() {
+        this.messageSubscription.unsubscribe();
+        if (this.setFavoriteSubscription) {
+            this.setFavoriteSubscription.unsubscribe();
+        }
+        if (this.deleteFavoriteSubscription) {
+            this.deleteFavoriteSubscription.unsubscribe();
+        }
     }
 
 }

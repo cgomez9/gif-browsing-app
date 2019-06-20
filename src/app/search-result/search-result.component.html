@@ -1,5 +1,5 @@
 <div *ngIf="this._album.length > 0" class="gif-container m-t-30 p-b-100">
-    <div *ngIf="this.target == 'trending'" class="row">
+    <div *ngIf="this.message && this.message.target == 'trending'" class="row">
         <div class="col-md-12">
             <h2 class="trending-title">Showing trending GIFs</h2>
         </div>
@@ -14,18 +14,22 @@
     </div>
 </div>
 
-<div *ngIf="this.target == 'search'">
+<div *ngIf="this.message && this.message.target == 'search'">
     <div *ngIf="this._album.length == 0 && this.search" class="gif-container m-t-30 p-b-100 mx-0">
         <div class="row">
-            <h2 class="no-results">Your search did not get any results :(</h2>
+            <div class="col-md-12">
+                <h2 class="no-results">Your search did not get any results :(</h2>
+            </div>
         </div>
     </div>
 </div>
 
-<div *ngIf="this.target == 'favorite'">
+<div *ngIf="this.message && this.message.target == 'favorite'">
     <div *ngIf="this._album.length == 0 && this.search" class="gif-container m-t-30 p-b-100 mx-0">
         <div class="row">
-            <h2 class="no-results">You don't have any favorite GIF yet.</h2>
+            <div class="col-md-12">
+                <h2 class="no-results">You don't have any favorite GIF yet</h2>
+            </div>
         </div>
     </div>
 </div>

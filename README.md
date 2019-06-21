@@ -11,14 +11,12 @@ First you need the following software installed:
 
 Once you have installed the dependecies, open a terminal in the root folder of the project and run the following command:
 
-`docker-compose up -d`
+`docker-compose -f docker-compose-prod.yml up -d --build`
 
 The first time is going to download and build the containers so it's going to take a while. Once the process is finished you can check that everything went right with the following command:
 
 `docker-compose ps`
 
-You should have one container running. In the next step, you need to enter the container and install the javascript dependencies. Use the following command in project's root:
+You should have one container running. 
 
-`docker-compose exec app npm install`
-
-This command it's going to install all project's dependencies. And this is it, if everything went right, you now have the app running in `localhost`. In order for this app to function, you need the Core [Core] (https://www.hola.com).
+And this is it, if everything went right, you now have the app running in `localhost`. In order for this app to function, you need the [Core](https://github.com/cgomez9/gif-browsing-core).

@@ -1,0 +1,29 @@
+.navbar-brand {
+    width: 250px;
+    padding-right: 30px;
+    overflow: hidden;
+    margin:0;
+}
+
+.navbar-logo {
+    display: block;
+    width: 100%;
+    margin: -37.875% 0;
+}
+
+.bg-app-navbar {
+    background-color: #2978A0!important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    font-weight: bold;
+    color: #C6E0FF!important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #315659!important;
+}
+
+.logout{
+    color: #BCAB79!important;
+}

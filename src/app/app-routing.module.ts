@@ -10,8 +10,8 @@ import { HistoryComponent } from './history/history.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'favorite', component: FavoriteComponent },
-  { path: 'history', component: HistoryComponent },
+  { path: 'favorite', component: FavoriteComponent, canActivate: [AuthGuard] },
+  { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 
